@@ -32,13 +32,6 @@ def loggerStarter():
 def loggerStoper():
     global allProcesses,statusLabel,terminator
     terminator.put(1)
-    """
-    for process in allProcesses:
-        process.terminate()
-        print('Logger Stops')
-        statusLabel['text'] = 'Stopped!'
-        stopBtn['state']= 'disabled'
-        startBtn['state'] = 'active'"""
 
 def closeApp():
     loggerStoper()
