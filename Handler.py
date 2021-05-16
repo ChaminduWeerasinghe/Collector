@@ -17,8 +17,12 @@ def terminate():
         process.terminate()
 
 def startHandler(q):
+    isFirstTime = True
     fileChecker()
     while True:
+        if isFirstTime:
+            isFirstTime = False
+            checker()
         if not q.empty():
             terminate()
             return sh.CancelJob
