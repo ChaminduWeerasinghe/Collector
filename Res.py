@@ -9,10 +9,10 @@ def Center(window,appHeight,appWidth):
 
 def daylight(hour):
     daylightInText = ''
-    if (hour > 6) and (hour < 11):
+    if (hour >= 6) and (hour < 11):
         daylightInText = 'Morning'
-    elif (hour > 11) and (hour < 15):
+    elif (hour >= 11) and (hour < 16):
         daylightInText = 'Afternoon'
-    elif (hour > 15) and (hour < 23):
+    elif (hour >= 16) and (hour < 21):
         daylightInText = 'Evening'
     return daylightInText

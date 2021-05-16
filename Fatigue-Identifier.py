@@ -7,7 +7,6 @@ import Handler
 import threading
 
 os.system('clear')
-#variables
 Path(os.path.join(os.path.join(Path().absolute()),'Data')).mkdir(parents=True, exist_ok=True)
 rootUI = Tk()
 rootUI.iconbitmap('@' + str(os.path.join(Path().absolute(), 'logo.xbm')))
