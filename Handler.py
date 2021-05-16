@@ -43,7 +43,6 @@ def checker():
             process = multiprocessing.Process(target=QuestionWindow.starter, args=(isMorComplete,))
             allProcesses.append(process)
             process.start()
-            #threading.Thread(target=QuestionWindow.starter,args=(isMorComplete,)).start()
     elif daylit == 'Afternoon':
         if isAftComplete.empty():
             isAftComplete.put(1)
@@ -59,5 +58,5 @@ def checker():
             process.start()
 
 
-sh.every(1).seconds.do(checker)
+sh.every(1).hour.do(checker)
 
