@@ -36,7 +36,7 @@ def starter(queue):
     popUI.protocol("WM_DELETE_WINDOW", closeApp)
     textDisplay = Label(popUI, text=text, font='Helvetica 15 italic').place(relx=0.01, rely=0.1)
     Btn = Button(popUI, text='Done!', cursor='hand2', bd='5', command=pressed, state='active')
-    Btn.place(relx=0.4, rely=0.9)
+    Btn.place(relx=0.45, rely=0.9)
     popUI.mainloop()
     KeyboardListner.join()
 
@@ -83,7 +83,4 @@ def closeApp():
     global popUI
     onClose()
     popUI.destroy()
-
-
-
 
