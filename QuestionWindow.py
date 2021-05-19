@@ -53,7 +53,7 @@ def on_press(event):
         List_of_Lists.append(list([e, clicktime,'']))
 
 def on_release(event):
-    global filename,List_of_Lists,toWrite,closer
+    global filename,List_of_Lists,toWrite,closer,textWrite
     now = datetime.now()
     releasetime = str(now)
     daylit = Res.daylight(now.hour)
@@ -62,7 +62,8 @@ def on_release(event):
         if list[0] == e:
             List_of_Lists.remove(list)
             data = e+'\t'+list[1]+'\t'+releasetime+'\t'+daylit+'\n'
-            toWrite.append(data)
+            if not textWrite.get('1.0', 'end-1c') == '':
+                toWrite.append(data)
 
 def isExist(listOFlist,key):
     for list in listOFlist:

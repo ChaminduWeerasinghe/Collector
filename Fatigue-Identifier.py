@@ -41,7 +41,7 @@ if __name__ == '__main__':
         rootUI.destroy()
 
     #widgets
-    rootUI.protocol("WM_DELETE_WINDOW", closeApp)
+    #rootUI.protocol("WM_DELETE_WINDOW", closeApp)
     welcomeLabel = Label(rootUI, text='Welcome', font='Helvetica 20 bold')
     statusLabel = Label(rootUI,text='',font='Helvetica 15')
     startBtn = Button(rootUI, text='Start',cursor='hand2', bd='5',height='2',width='10', command=loggerStarter,state='active')
