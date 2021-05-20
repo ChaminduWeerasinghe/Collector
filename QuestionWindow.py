@@ -7,6 +7,7 @@ from multiprocessing import Queue
 import Writer
 import xlrd
 from random import randint
+from Custom import CustomText
 
 filename = 'Data/Keypress.tsv'
 List_of_Lists = []
@@ -14,10 +15,12 @@ q = None
 toWrite = []
 KeyboardListner = None
 Btn = None
+insertStart = Queue(maxsize=1)
 
 def starter(queue):
-    global popUI,textWrite,q,KeyboardListner,Btn
+    global popUI,textWrite,q,KeyboardListner,Btn,text,insertStart
     q = queue
+    insertStart.put(False)
     KeyboardListner = Listener(on_press=on_press, on_release=on_release)
     KeyboardListner.start()
     workbook = xlrd.open_workbook('Data/sherlock_Text.xls', )
@@ -31,14 +34,21 @@ def starter(queue):
     popUI.resizable(False, False)
     location = Res.Center(popUI, popHeight, popWidth)
     popUI.geometry(f'{popWidth}x{popHeight}+{int(location[0])}+{int(location[1])}')
-    textWrite = Text(popUI, width=80, height=20)
+    #textWrite = Text(popUI, width=80, height=20)
+    textWrite = CustomText(popUI, width=80, height=20)
     textWrite.place(relx=0.02, rely=0.3)
+    textWrite.bind("<<TextModified>>", onModification)
     popUI.protocol("WM_DELETE_WINDOW", closeApp)
     textDisplay = Label(popUI, text=text, font='Helvetica 15 italic').place(relx=0.01, rely=0.1)
     Btn = Button(popUI, text='Done!', cursor='hand2', bd='5', command=pressed, state='active')
     Btn.place(relx=0.45, rely=0.9)
     popUI.mainloop()
     KeyboardListner.join()
+
+def onModification(event):
+    global insertStart
+    if not insertStart.empty():
+          insertStart.get()
 
 
 def pressed():
@@ -53,7 +63,7 @@ def on_press(event):
         List_of_Lists.append(list([e, clicktime,'']))
 
 def on_release(event):
-    global filename,List_of_Lists,toWrite,closer,textWrite
+    global filename,List_of_Lists,toWrite,closer,textWrite,insertStart
     now = datetime.now()
     releasetime = str(now)
     daylit = Res.daylight(now.hour)
@@ -62,8 +72,9 @@ def on_release(event):
         if list[0] == e:
             List_of_Lists.remove(list)
             data = e+'\t'+list[1]+'\t'+releasetime+'\t'+daylit+'\n'
-            if not textWrite.get('1.0', 'end-1c') == '':
+            if insertStart.empty():
                 toWrite.append(data)
+
 
 def isExist(listOFlist,key):
     for list in listOFlist:

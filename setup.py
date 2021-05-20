@@ -4,11 +4,9 @@ import os
 
 # Dependencies are automatically detected, but it might need fine tuning.
 projectLocation = os.path.dirname(os.curdir)
-icon_loc = (os.path.join(projectLocation,'','logo.xbm'),"logo.xbm")
-text_file = (os.path.join(projectLocation,'Data','sherlock_Text.xls'),"sherlock_Text.xls")
 build_exe_options = {
     "packages": ["os", "tkinter", "pynput.keyboard",'pynput.mouse',"xlrd","random","schedule",'multiprocessing','pathlib'],
-    "include_files": [icon_loc,text_file,(r"C:/Users/chami/AppData/Local/Programs/Python/Python39/DLLs/tcl86t.dll","tcl86t.dll"),(r"C:/Users/chami/AppData/Local/Programs/Python/Python39/DLLs/tk86t.dll","tk86t.dll")]
+    "include_files": [(os.path.join(projectLocation,'','logo.xbm'),"logo.xbm"),(os.path.join(projectLocation,'Data','sherlock_Text.xls'),"sherlock_Text.xls"),(r"C:/Users/chami/AppData/Local/Programs/Python/Python39/DLLs/tcl86t.dll","tcl86t.dll"),(r"C:/Users/chami/AppData/Local/Programs/Python/Python39/DLLs/tk86t.dll","tk86t.dll")]
 }
 # GUI applications require a different base on Windows (the default is for
 # a console application).
